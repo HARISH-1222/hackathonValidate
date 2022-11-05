@@ -52,7 +52,7 @@ document.addEventListener("submit",function(){
           }
     }
     else if(numer.length < 10){
-        document.querySelector(".printError").textContent = "Enter the Numer";
+        document.querySelector(".printError").textContent = "Enter Numer is less then 10";
 
         myFunction();
         function myFunction() {
