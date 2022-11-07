@@ -1,6 +1,6 @@
 console.log("hi");
 // form.addEventListener('submit', )
-document.addEventListener("submit",function(){
+document.addEventListener("submit",async function(){
     event.preventDefault();
     let firstName = document.querySelector(".firsrName").value;
     let lastName = document.querySelector(".lastName").value;
@@ -15,21 +15,24 @@ document.addEventListener("submit",function(){
     const validate = (email) => {
         return String(email).toLowerCase()
           .match(
-            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-          );
-
-
-
+            // /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            /[a-z0-9]+[a-z0-9\.]+[@][a-z0-9]+[.][a-z0-9]+/
+          ); 
     };
 
     function ValidateEmail(email)
     {
-    var mailformat = /^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/;
-    if(!email.value.match(mailformat))
+        var mailformat =  /[a-z0-9]+[a-z0-9\.]+[@][a-z0-9]+[.][a-z0-9]+/
+    // var mailformat = /^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$;
+    if(!(email.match(mailformat)))
     {
     // alert("You have entered an invalid email address!");    //The pop up alert for an invalid email address
     // document.form1.text1.focus();
-    document.querySelector(".printError").textContent = "Not Valid";
+    console.log("false");
+    return false;
+    }else{
+        console.log("true");
+        return true;
     }
 }
 
@@ -39,7 +42,7 @@ document.addEventListener("submit",function(){
         myFunction();
         function myFunction() {
             let element = document.querySelector(".firsrName");
-            element.classList.add("border");
+            element.classList.toggle("border");
           }
     }
     else if(lastName == 0){
@@ -60,10 +63,14 @@ document.addEventListener("submit",function(){
             element.classList.add("border");
           }
     }
-    else if(ValidateEmail(email)){
-        document.querySelector(".printError").textContent = "Not Valid";
-        let v = document.querySelector("userEmail");
-        v.classList.add("border");
+    else if(ValidateEmail(email) == false){
+        document.querySelector(".printError").textContent = "Email Not Valid";
+        function myFunction() {
+            let element = document.querySelector(".userEmail");
+            element.classList.add("border");
+        }
+        // let v = document.querySelector("userEmail");
+        // v.classList.add("border");
         console.log("");    
     }
     else if(country == 0){
